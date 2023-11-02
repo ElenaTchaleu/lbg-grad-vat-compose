@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  calc-api:
+    image: elenatch/lbg-grad-compose-api
+    build: ./calculator-api
+    ports:
+      - target: 8080
+        published: 8080
+  front-a:
+    image: elenatch/lbg-grad-compose-front-a
+    build:
+      context: ./frontend-1
+      args:
+        SERVER_URL: ${SERVER_URL}
+    ports:
+      - target: 80
+        published: 80
+  front-b:
+    image: elenatch/lbg-grad-compose-front-b
+    build:
+      context: ./frontend-2
+      args:
+        SERVER_URL: ${SERVER_URL}
+    ports:
+      - target: 80
+        published: 81
